@@ -1,6 +1,7 @@
 package MonedaServices;
 
 import Entity.Moneda;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 public class MonedaServices {
@@ -34,6 +35,9 @@ public class MonedaServices {
     }
 
     public void listaMonedas() {
+        
+        DecimalFormat formato = new DecimalFormat("#.00");
+        
         String[] monedas = {"De Pesos a Dólar", "De Pesos a Euro", "De Pesos a Libras", "De Pesos a Yen",
             "De Pesos a Won Coreano", "De Dolar a Pesos", "De Euro a Pesos", "De Libras a Pesos", "De Yen a Pesos",
             "De Won Coreano a Pesos"};
@@ -75,43 +79,43 @@ public class MonedaServices {
         switch (seleccionMoneda) {
             case 0:
                 double pesosAdolar = m.getCantidad() / m.getDolar();
-                JOptionPane.showMessageDialog(null, "Tienes $" + pesosAdolar + " Dolares");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(pesosAdolar) + " Dolares");
                 break;
             case 1:
                 double pesosAeuro = m.getCantidad() / m.getEuro();
-                JOptionPane.showMessageDialog(null, "Tienes $" + pesosAeuro + " Euros");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(pesosAeuro) + " Euros");
                 break;
             case 2:
                 double pesosLibras = m.getCantidad() / m.getLibras();
-                JOptionPane.showMessageDialog(null, "Tienes $" + pesosLibras + " Yenes");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(pesosLibras) + " Yenes");
                 break;
             case 3:
                 double pesosAyen = m.getCantidad() / m.getYen();
-                JOptionPane.showMessageDialog(null, "Tienes $" + pesosAyen + " Yenes");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(pesosAyen) + " Yenes");
                 break;
             case 4:
                 double pesosAwonCoreano = m.getCantidad() / m.getWonCoreano();
-                JOptionPane.showMessageDialog(null, "Tienes $" + pesosAwonCoreano + "Won Coreano");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(pesosAwonCoreano) + "Won Coreano");
                 break;
             case 5:
                 double dolarApesos = m.getCantidad() * m.getDolar();
-                JOptionPane.showMessageDialog(null, "Tienes $" + dolarApesos + "Pesos");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(dolarApesos) + "Pesos");
                 break;
             case 6:
                 double euroApesos = m.getCantidad() * m.getEuro();
-                JOptionPane.showMessageDialog(null, "Tienes $" + euroApesos + "Pesos");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(euroApesos) + "Pesos");
                 break;
             case 7:
                 double libraApesos = m.getCantidad() * m.getLibras();
-                JOptionPane.showMessageDialog(null, "Tienes $" + libraApesos + "Pesos");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(libraApesos) + "Pesos");
                 break;
             case 8:
                 double yenApesos = m.getCantidad() * m.getYen();
-                JOptionPane.showMessageDialog(null, "Tienes $" + yenApesos + "Pesos");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(yenApesos) + "Pesos");
                 break;
             case 9:
                 double wonApesos = m.getCantidad() * m.getWonCoreano();
-                JOptionPane.showMessageDialog(null, "Tienes $" + wonApesos + "Pesos");
+                JOptionPane.showMessageDialog(null, "Tienes $" + formato.format(wonApesos) + "Pesos");
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Moneda inválida");
@@ -208,20 +212,23 @@ public class MonedaServices {
     }
 
     public void deseaContinuar() {
-        boolean condicion = false;
+        
 
         int opcion = JOptionPane.showOptionDialog(null, "¿Deseas continuar?", "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Yes", "No", "Cancelar"}, "Yes");//AQUI
-
-        if (opcion == 0) {
-            condicion = true;
-            entradaValor();
-            listaMonedas();
-            deseaContinuar();
-        } else if (opcion == 1) {
-            condicion = false;
-            finalizarPrograma();
-        } else if (opcion == 2) {
-            finalizarPrograma();
+        switch (opcion) {
+            case 0:
+                entradaValor();
+                listaMonedas();
+                deseaContinuar();
+                break;
+            case 1:
+                finalizarPrograma();
+                break;
+            case 2:
+                finalizarPrograma();
+                break;
+            default:
+                break;
         }
     }
 
@@ -231,3 +238,4 @@ public class MonedaServices {
     }
 
 }
+
