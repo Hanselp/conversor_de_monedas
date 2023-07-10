@@ -1,32 +1,38 @@
 package MonedaServices;
 
 import Entity.Moneda;
+import TemperaturaServices.TemperaturaServices;
+
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 public class MonedaServices {
 
     Moneda m = new Moneda();
+    TemperaturaServices ts = new TemperaturaServices();
 
     public void mostrarMenu() {
 
         try {
-            JOptionPane.showMessageDialog(null, "Bienvenido al Conversor de Monedas");
-            String[] opciones = {"Conversor de Monedas", "Conversor de Unidades", "Conversor de Temperatura"};
+            JOptionPane.showMessageDialog(null, "Bienvenido al Conversor");
+            String[] opciones = {"Conversor de Monedas", "Conversor de Temperatura"};
 
             int seleccion = JOptionPane.showOptionDialog(null, "Selecciona una opcion de conversion:", "Menu",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
 
-            if (seleccion == 0) {
-                cargarMonedas();
-                entradaValor();
-                listaMonedas();
+            switch (seleccion) {
+                case 0:
+                    cargarMonedas();
+                    entradaValor();
+                    listaMonedas();
+                    break;
+            
+                case 1:
+                    ts.cargarTemperatura();
+                    break;
+                default:
+                    break;
             }
-            /*else if (seleccion == 1) {
-            //cargarUnidades();
-        } else if (seleccion == 2){
-            cargarTemperatura();
-        }*/
             deseaContinuar();
         } catch (NullPointerException e) {
             finalizarPrograma();
@@ -217,9 +223,7 @@ public class MonedaServices {
         int opcion = JOptionPane.showOptionDialog(null, "¿Deseas continuar?", "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Yes", "No", "Cancelar"}, "Yes");//AQUI
         switch (opcion) {
             case 0:
-                entradaValor();
-                listaMonedas();
-                deseaContinuar();
+               mostrarMenu();
                 break;
             case 1:
                 finalizarPrograma();
@@ -238,4 +242,3 @@ public class MonedaServices {
     }
 
 }
-
